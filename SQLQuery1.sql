@@ -17,7 +17,7 @@ CREATE TABLE Category (
     description TEXT
 );
 -- Chèn dữ liệu mẫu
-INSERT INTO Category (CategoryID, CategoryName, Description)
+INSERT INTO Category (category_id, category_name, Description)
 VALUES (1, 'BAG', 'Luxury package'),
        (2, 'BAG', 'armpit pocket');
 
@@ -33,7 +33,7 @@ CREATE TABLE BagProduct (
     price DECIMAL(10,2),
     stock_quality INT,
     image_url VARCHAR(255),
-    FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
+    FOREIGN KEY (category) REFERENCES Category(category_id)
 );
 INSERT INTO BagProduct (product_id, product_code, product_name, category, price, stock_quality, image_url)
 VALUES
@@ -64,16 +64,19 @@ SELECT * FROM Employee;
 DROP TABLE IF EXISTS Employee;
 -- Tạo bảng Customer
 CREATE TABLE Customer (
-    CustomerID INT PRIMARY KEY IDENTITY(1,1),
-    CustomerCode NVARCHAR(50) NOT NULL,
-    CustomerName NVARCHAR(100) NOT NULL,
-    PhoneNumber NVARCHAR(20),
-    Address NVARCHAR(255)
+    customer_id INT PRIMARY KEY ,
+    customer_code VARCHAR(50) UNIQUE,
+    customer_name VARCHAR(150) NOT NULL,
+    phone VARCHAR(20),
+    address VARCHAR(255),
+    email VARCHAR(100)
 );
-INSERT INTO Customers (customerCode, customerName, phone, address)
+INSERT INTO Customer (customer_id, customer_code, customer_name, phone, address, email)
 VALUES
-('k001', 'Pham Quang Dung', '0366612785', 'HaiPhong');
-SELECT * FROM [dbo].[Customers];
+(1, 'C001', 'Nguyen Van An', '0905123456', '123 Le Loi, Da Nang', 'an.nguyen@example.com'),
+(2, 'C002', 'Tran Thi Hoa', '0912233445', '45 Tran Phu, Ha Noi', 'hoa.tran@example.com'),
+(3, 'C003', 'Le Van Minh', '0988776655', '78 Nguyen Hue, Ho Chi Minh', 'minh.le@example.com');
+select*from [Customer]
 
 DROP TABLE IF EXISTS Customers;
 
